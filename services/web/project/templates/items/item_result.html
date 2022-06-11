@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div>
+        <div class='pt-3' id='hero-container'>
+            <form method='POST' action="{{ url_for('item.search_item') }}" class='col-md-6 container' id='searchForm'>
+                <div class='form-group mt-2'>
+                    <input type='text' class='form-control mb-2' name='q' id='q'>
+                    <input type='submit' class='btn' id='btnSearch' value='Chercher'>
+                </div>
+            </form>
+        </div>
+        <div class='row container-fluid mt-3'>
+            <div class='col-md-3 pt-5 d-flex justify-content-center mt-2'>
+                <ul class="list-group col-md-12">
+                    {% for cat in context['categories']%}
+                    <li class="list-group-item">
+                        <a href="{{ url_for('item.item_by_category_view', category=cat.name) }}">{{ cat.name }}</a>
+                    </li>
+                    {% endfor %}
+                  </ul>
+            </div>
+            <div class='col-md-9'>
+                <div class='d-flex justify-content-end'>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            {% for page_num in context['items'].iter_pages() %}
+                                {% if page_num %}
+                                    {% if context['items'].page == page_num %}
+                                        <li class="page-item">
+                                            <a class="page-link active-pagination" href="?page={{page_num}}" aria-label="Previous">
+                                            <span aria-hidden="true">{{ page_num }}</span>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{page_num}}" aria-label="Previous">
+                                            <span aria-hidden="true">{{ page_num }}</span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% else %}
+                                  
+                                {% endif %}
+                            
+                            {% endfor %}
+                        </ul>
+                      </nav>
+                </div>
+                {% if context['items'].items %}
+                {% for item in context['items'].items %}
+                    <div class='card item-card'>
+                        <div class='card-body'>
+                            <p class='text-muted item-category' >{{ item.category|upper }}</p>
+                            <a class='item-name' href="{{ url_for('item.item_detail_view',item_name=item.name) }}">
+                                {{ item.name }}
+                            </a>
+                            <p class='text-primary item-adress'>
+                                {{ item.adress }}, {{ item.city }}
+                            </p>
+                            <a class='btn btn-info item-card-btn'>Afficher numero</a>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

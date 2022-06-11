@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='container pt-3'>
+    <div class='card item-card'>
+        <div class='card-body'>
+            <p class='text-muted item-category' >{{ context['item'].category|upper }}</p>
+            <a class='item-name' href="#">
+                {{ context['item'].name }}
+            </a>
+            <p class='text-primary item-adress'>
+                {{ context['item'].adress }}, {{ context['item'].city }}
+            </p>
+            <a class='btn btn-info item-card-btn'>{{ context['item'].phone }}</a>
+        </div>
+    </div>
+    <div class='card mt-3 item-card p-3'>
+        <p class='item-description'>
+            {{ context['item'].description }}
+        </p>
+    </div>
+</div>
+{% endblock %}
