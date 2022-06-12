@@ -1,7 +1,7 @@
 from decouple import config
 import os 
 
-basedir = os.path.abspath(os.path.dir(__file__))
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
