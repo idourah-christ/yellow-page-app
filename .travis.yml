@@ -2,10 +2,13 @@ sudo: required
 
 services:
   - docker
-  - docker-compose 
 
 before_install:
-  - docker-compose -f docker-compose.dev.yml up 
+  - docker build karatsuba96/yellow_app -f ./services/web/Dockerfile.dev ./services/web
 
 script:
-  - docker exec -it yellow_app pytest
+  - docker run yellow_app python manage.py create_db 
+
+after_success:
+  - docker build karatsuba96/multi-nginx ./services/nginx
+  - docker build karatsuba96/multi-web ./services/web
