@@ -1,15 +1,13 @@
 from decouple import config
+import os
 
-SECRET_KEY = config('SECRET_KEY')
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
-POSTGRES_PASSOWRD = config("POSTGRES_PASSWORD") 
-POSTGRES_DB = config("POSTGRES_DB")
-POSTGRES_USER = config("POSTGRES_USER")
-
-SQLALCHEMY_DATABASE_URI = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSOWRD}@:5432/{POSTGRES_DB}?host=db"
-
+SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite://')
 SQLALCHEMY_TRACK_MODIFICATIONS = True 
 
 ITEM_PER_PAGE = 3
 
-TEST_DB = config("TEST_DB")
