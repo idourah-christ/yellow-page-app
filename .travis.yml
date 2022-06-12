@@ -4,11 +4,11 @@ services:
   - docker
 
 before_install:
-  - docker build karatsuba96/yellow_app -f ./services/web/Dockerfile.dev ./services/web
+  - docker build -t karatsuba96/yellow_app -f ./services/web/Dockerfile.dev ./services/web
 
 script:
   - docker run yellow_app python manage.py create_db 
 
 after_success:
-  - docker build karatsuba96/multi-nginx ./services/nginx
-  - docker build karatsuba96/multi-web ./services/web
+  - docker build -t karatsuba96/multi-nginx ./services/nginx
+  - docker build -t karatsuba96/multi-web ./services/web
