@@ -10,5 +10,8 @@ script:
   - docker run karatsuba96/yellow_app pytest
 
 after_success:
-  - docker build -t karatsuba96/multi-nginx ./services/nginx
-  - docker build -t karatsuba96/multi-web ./services/web
+  - docker build -t karatsuba96/yellow_page_nginx ./services/nginx
+  - docker build -t karatsuba96/yellow_page_web ./services/web
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push karatsuba96/yellow_page_nginx 
+  - docker push karatsuba96/yellow_page_web
