@@ -7,7 +7,7 @@ before_install:
   - docker build -t karatsuba96/yellow_app -f ./services/web/Dockerfile.dev ./services/web
 
 script:
-  - docker run karatsuba96/yellow_app python manage.py create_db 
+  - docker run karatsuba96/yellow_app pytest
 
 after_success:
   - docker build -t karatsuba96/multi-nginx ./services/nginx
