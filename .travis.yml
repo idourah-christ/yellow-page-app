@@ -4,16 +4,16 @@ services:
   - docker
 
 before_install:
-  - docker build -t idourah96/idourah-dockerhub/yellow_app -f ./services/web/Dockerfile.dev ./services/web
+  - docker build -t idourah96/yellow-page-web -f ./services/web/Dockerfile.dev ./services/web
 
 script:
-  - docker run idourah96/idourah-dockerhub/yellow_app pytest
+  - docker run idourah96/yellow-page-web pytest
 
 after_success:
-  - docker build -t idourah96/idourah-dockerhub/yellow_page_nginx ./services/nginx
-  - docker build -t idourah96/idourah-dockerhub/yellow_page_web ./services/web
+  - docker build -t idourah96/yellow-page-nginx ./services/nginx
+  - docker build -t idourah96/yellow-page-web ./services/web
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   
   # push to dockerhub repository
-  - docker push idourah96/idourah-dockerhub/yellow_page_nginx 
-  - docker push idourah96/idourah-dockerhub/yellow_page_web
+  - docker push idourah96/yellow-page-web 
+  - docker push idourah96/yellow-page-nginx
