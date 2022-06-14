@@ -55,5 +55,7 @@ RUN chown -R app:app $APP_HOME
 # change the user to app 
 USER app 
 
-ENTRYPOINT [ "/home/app/web/entrypoint.sh" ]
+CMD ["gunicorn","-b", "0.0.0.0:4000","manage:app"]
+
+ENTRYPOINT ["/home/app/web/entrypoint.sh"]
 
