@@ -1,0 +1,29 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination pagination-sm">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% for page_num in context['items'].iter_pages() %}
+            {% if page_num %}
+                {% if context['items'].page == page_num %}
+                    <li class="page-item">
+                        <a class="page-link active-pagination" href="?page={{page_num}}" aria-label="Previous">
+                        <span aria-hidden="true">{{ page_num }}</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{page_num}}" aria-label="Previous">
+                        <span aria-hidden="true">{{ page_num }}</span>
+                        </a>
+                    </li>
+                {% endif %}
+            {% else %}
+              
+            {% endif %}
+        
+        {% endfor %}
+    </ul>
+  </nav>

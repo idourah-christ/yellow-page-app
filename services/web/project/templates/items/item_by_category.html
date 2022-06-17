@@ -2,7 +2,7 @@
 {% block content %}
     <div>
         <div class='pt-3' id='hero-container'>
-            <form method='POST' action="{{ url_for('item.search_item') }}" class='col-md-6 container' id='searchForm'>
+            <form method='POST' action="{{ url_for('items.search_item') }}" class='col-md-6 container' id='searchForm'>
                 <div class='form-group mt-2'>
                     <input type='text' class='form-control mb-2' name='q' id='q'>
                     <input type='submit' class='btn' id='btnSearch' value='Chercher'>
@@ -14,7 +14,7 @@
                 <ul class="list-group col-md-12">
                     {% for cat in context['categories']%}
                     <li class="list-group-item">
-                        <a href="{{ url_for('item.item_by_category_view', category=cat.name) }}">{{ cat.name }}</a>
+                        <a href="{{ url_for('items.item_by_category_view', category=cat.name) }}">{{ cat.name }}</a>
                     </li>
                     {% endfor %}
                 </ul>

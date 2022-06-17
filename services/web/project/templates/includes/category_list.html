@@ -1,0 +1,7 @@
+<ul class="list-group col-md-12">
+    {% for cat in context['categories']%}
+    <li class="list-group-item">
+        <a href="{{ url_for('items.item_by_category_view', category=cat.name) }}">{{ cat.name }}</a>
+    </li>
+    {% endfor %}
+  </ul>
