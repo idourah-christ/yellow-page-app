@@ -1,15 +1,37 @@
 * {}
 
-nav.nav-bar {
+nav.navbar {
     padding: 10px 5px 10px 5px;
     background-color: #874676;
+    padding-left: 20px;
 }
 
-nav.nav-bar a.nav-link {
+nav.navbar a.nav-link {
     font-size: 17px;
     line-height: normal;
     color: white;
     font-style: bold;
+}
+
+#bar-icon {
+    color: white;
+    margin: 0px;
+}
+
+.navbar-brand {
+    color: white;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.navbar-brand:hover {
+    color: white;
+    margin-left: 0px;
+}
+
+#btnLogin {
+    border: 1px solid white;
+    color: white;
 }
 
 div#hero-container {
@@ -80,4 +102,24 @@ a.active-pagination {
     background-color: #874676;
     color: white;
     width: 150px;
+}
+
+/********** Registration form and login form *********************************/
+input.btn-authentication {
+    border: 1px solid #874676;
+    background-color: #874676;
+    color: white;
+}
+
+.auth-forms {
+    margin: 45px 0px 0px 0px;
+}
+
+input.form-input {
+    border: 1px solid black;
+}
+
+h4.form-title {
+    font-weight: 600;
+    margin-bottom: 25px;
 }
