@@ -4,7 +4,7 @@ services:
   db:    
     image: postgres:alpine 
     env_file:
-      - ./services/web/config/.env.dev.db
+      - ./services/web/config/.env
     restart: always 
     volumes:
       - postgres_data_dev:/var/lib/postgresql/data
@@ -22,7 +22,7 @@ services:
     ports:
       - 4000:4000
     env_file:
-      - ./services/web/config/.env.dev
+      - ./services/web/config/.env
     restart: always
 
 volumes:

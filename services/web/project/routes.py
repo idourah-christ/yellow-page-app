@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request,redirect, url_for, flash
-from config import dev
 from project.items.models import Category, Item
 from project import db 
 from sqlalchemy import exc 
@@ -13,7 +12,7 @@ def home():
     context['page_title'] = 'LaViolette | Acceuil'
     page = request.args.get('page',1, type=int)
     context['categories'] = Category.query.all()
-    context['items'] = Item.query.order_by(Item.created_at.desc()).paginate(per_page=dev.ITEM_PER_PAGE, page=page)
+    context['items'] = Item.query.order_by(Item.created_at.desc()).paginate(per_page=3, page=page)
     return render_template('app/home.html',context=context)
 
 @app.route('/')

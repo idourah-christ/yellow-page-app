@@ -1,7 +1,7 @@
 <div class='card item-card'>
     <div class='card-body'>
         <p class='text-muted item-category' >{{ item.category|upper }}</p>
-        <a class='item-name' href="{{ url_for('items.item_detail_view',item_name=item.name) }}">
+        <a class='item-name' href="{{ url_for('items.item_detail_view',id=item.id) }}">
             {{ item.name }}
         </a>
         <p class='text-primary item-adress'>
