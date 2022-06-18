@@ -123,3 +123,21 @@ h4.form-title {
     font-weight: 600;
     margin-bottom: 25px;
 }
+
+#category_title {
+    background-color: #874676;
+    color: white;
+}
+
+li#category_title a {
+    color: white;
+    font-size: 19px;
+}
+
+li#category_title a:hover {
+    text-decoration: none;
+}
+
+#category_title_icon {
+    font-size: 19px;
+}

@@ -7,13 +7,13 @@ from project.items import forms as item_forms
 
 items = Blueprint('items',__name__)
 
-@items.route('/<string:item_name>/detail')
-def item_detail_view(item_name):
+@items.route('/<int:id>/detail')
+def item_detail_view(id):
     context = {}
     context['page_title'] = "detail"
     try:
-        name = item_name 
-        context['item'] = Item.query.filter_by(name=name).one()
+        item_id = id 
+        context['item'] = Item.query.get(item_id)
     except exc.SQLAlchemyError as e:
         logging.debug(f"something wrong when retreivin item : {e}")
 

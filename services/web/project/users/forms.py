@@ -1,6 +1,7 @@
 from wtforms import form, fields, validators
 from project.users import models as user_model
 from project import db, flask_bcrypt
+import re 
 
 class LoginForm(form.Form):
     login = fields.StringField(validators=[validators.DataRequired()])
@@ -33,7 +34,12 @@ class RegistrationForm(form.Form):
             raise validators.ValidationError(f'Un compte existe déjà avec {self.username.data}')
 
     def validate_email(self, field):
+        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+
         if db.session.query(user_model.User).filter_by(email=self.email.data).count() > 0:
             raise validators.ValidationError(f"Un compte existe déjà avec {self.email.data}")
+
+        if not (re.fullmatch(regex, self.email.data)):
+            raise validators.ValidationError(f"{self.email.data} n'est pas correcte")   
 
     
