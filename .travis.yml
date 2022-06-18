@@ -7,9 +7,9 @@ before_install:
   - docker build -t idourah96/yellow-page-web -f ./services/web/Dockerfile.dev ./services/web
 
 script:
-  - docker run idourah96/yellow-page-web 
-  - docker exec -it idourah96/yellow-page-web export TRAVIS=true
-  - docker exec -it idourah96/yellow-page-web pytest -v
+  - docker run --name yellow_app idourah96/yellow-page-web 
+  - docker exec -it yellow_app TRAVIS=true
+  - docker exec -it yellow_app pytest -v
  
 after_success:
   - docker build -t idourah96/yellow-page-nginx ./services/nginx
