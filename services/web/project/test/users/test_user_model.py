@@ -1,6 +1,11 @@
 from project.users.models import User 
+import pytest
+import os
 
-"""
+@pytest.mark.skipif(
+    "TRAVIS" in os.environ and os.environ["TRAVIS"] == "True",
+    reason="Skipping this test on Travis CI.",
+)
 
 def test_create_user_instance(session):
 
@@ -45,5 +50,3 @@ def test_create_user_instance_without_password(session):
     session.commit()
     assert user.id is not None 
     assert user.password is None 
-
-"""
