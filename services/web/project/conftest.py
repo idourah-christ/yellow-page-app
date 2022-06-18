@@ -1,14 +1,6 @@
-
-from flask_sqlalchemy import SQLAlchemy
-import pytest 
-from sqlalchemy import exc
 from project import create_app, db as database
-from dotenv import load_dotenv
-from sqlalchemy import create_engine, create_mock_engine, MetaData, engine
-from sqlalchemy.exc import ProgrammingError, OperationalError
 import pytest
-import logging
-from sqlalchemy_utils.functions import database_exists,drop_database, create_database
+from sqlalchemy_utils.functions import database_exists
 from config.config import TestingConfig
 
 
