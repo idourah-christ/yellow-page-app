@@ -15,7 +15,7 @@ account = Blueprint('account', __name__)
 def login_view():
     context = {}
     form = user_forms.LoginForm(request.form)
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST' and helpers.validate_form_on_submit(form):
         user = form.get_user()
         login.login_user(user)
         flash("Bienvenue {user.username}",'success')
@@ -28,17 +28,13 @@ def login_view():
 def registration_view():
     context = {}
     form = user_forms.RegistrationForm(request.form)
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST' and helpers.validate_form_on_submit(form):
         user = User()
         form.populate_obj(user)
         try:
             db.session.add(user)
             db.session.commit()
-            flash
-            ("""
-                Création du compte réussie !! Connectez-vous {form.username}
-                """, "success"
-            )
+            flash("Création du compte réussie !! Connectez-vous {form.username}", "success")
             return redirect(url_for('account.login_view'))
         except exc.SQLAlchemyError as e:
             flash

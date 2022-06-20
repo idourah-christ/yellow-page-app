@@ -18,7 +18,7 @@ class LoginForm(form.Form):
             )
         
         if not (flask_bcrypt.check_password_hash(user.password, self.password.data)):
-            raise validators.ValidationError('Invalid password')
+            raise validators.ValidationError("Mot de passe incorrecte")
 
     def get_user(self):
         return db.session.query(user_model.User)\

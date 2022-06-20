@@ -57,6 +57,7 @@ class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = TESTING_DB_URL
     DEBUG = True 
     TESTING = True
-
+    WTF_CSRF_ENABLED = False
+    
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = PROD_DB_URL

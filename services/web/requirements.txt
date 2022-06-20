@@ -27,7 +27,6 @@ py==1.11.0
 pycparser==2.21
 pyparsing==3.0.9
 pytest==7.1.2
-pytest-pgsql==1.1.2
 python-dateutil==2.8.2
 python-decouple==3.6
 python-dotenv==0.20.0
