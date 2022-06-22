@@ -1,6 +1,9 @@
+from email.policy import default
 from sqlalchemy.ext.hybrid import hybrid_property
-from project import db, flask_bcrypt, flask_admin
+from project import db, flask_bcrypt, admin
 from datetime import datetime
+from flask_admin.contrib.sqla import ModelView
+from .views import UserModelView
 
 class User(db.Model):
     __tablename__ = "users"
@@ -9,6 +12,8 @@ class User(db.Model):
     first_name = db.Column(db.String(100))
     last_name = db.Column(db.String(100))
     username = db.Column(db.String(80), unique=True)
+    is_active = db.Column(db.Boolean, default=False)
+    admin = db.Column(db.Boolean, default=False)
     email = db.Column(db.String(120), unique=True)
     _password = db.Column(db.String(180))
     create_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -16,6 +21,10 @@ class User(db.Model):
     @hybrid_property
     def password(self):
         return self._password
+    
+    @property
+    def is_admin(self):
+        return self.admin
     
     @password.setter
     def password(self, password):
@@ -39,5 +48,4 @@ class User(db.Model):
     def __unicode__(self):
         return self.username
 
-from flask_admin.contrib.sqla import ModelView
-flask_admin.add_view(ModelView(User, db.session))
+admin.add_view(UserModelView(User, db.session))

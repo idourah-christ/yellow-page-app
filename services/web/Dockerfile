@@ -57,5 +57,5 @@ USER app
 
 CMD ["gunicorn","-b", "0.0.0.0:4000","manage:app"]
 
-ENTRYPOINT ["/home/app/web/entrypoint.sh"]
+ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
 

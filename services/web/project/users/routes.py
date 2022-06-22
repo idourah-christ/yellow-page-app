@@ -11,6 +11,11 @@ import logging
 
 account = Blueprint('account', __name__)
 
+@account.route('logout', methods=['POST', 'GET'])
+def logout_view():
+    login.logout_user()
+    return redirect(url_for('account.login_view'))
+
 @account.route('login', methods=['GET','POST'])
 def login_view():
     context = {}
@@ -18,8 +23,8 @@ def login_view():
     if request.method == 'POST' and helpers.validate_form_on_submit(form):
         user = form.get_user()
         login.login_user(user)
-        flash("Bienvenue {user.username}",'success')
-        return redirect(url_for('app.home'))
+        flash("Bienvenue {}".format(user.username),'success')
+        return redirect(url_for('app.index'))
 
     context['page_title'] = 'LaViolette | Connexion' 
     return render_template('account/login.html', form=form, context=context)
@@ -34,11 +39,11 @@ def registration_view():
         try:
             db.session.add(user)
             db.session.commit()
-            flash("Création du compte réussie !! Connectez-vous {form.username}", "success")
+            flash(f"Création du compte réussie !! Connectez-vous {form.username.data}", "success")
             return redirect(url_for('account.login_view'))
         except exc.SQLAlchemyError as e:
             flash
-            ("""
+            (f"""
                 La création de votre compte a échoué, Nous vous prions de reassayer plus tard. {e}"""
                 ,'danger'
             )
