@@ -3,7 +3,6 @@ from project import db
 from project.items.models import Category, Item
 from sqlalchemy import exc
 import logging
-from project.items import forms as item_forms
 
 items = Blueprint('items',__name__)
 
@@ -52,40 +51,4 @@ def search_item():
     context['categories'] = Category.query.all()
     return render_template('items/item_result.html', context=context)
 
-@items.route('/items', methods=['GET','POST'])
-def item_list():
-    context = {}
-    context['page_title'] = 'Items list'
-    context['items'] = Item.query.all()
-    return render_template('items/item_list.html', context=context)
 
-@items.route('/add_item', methods=['GET','POST'])
-def add_item():
-    context={}
-    form = item_forms.AddItemForm()
-    form.category.choices = categories = Category.query.all()
-    if form.validate_on_submit():
-        if form.city.data != 'None':
-            name = form.name.data
-            adress = form.adress.data 
-            city = form.city.data 
-            phone = form.phone.data 
-            desc = form.description.data 
-            category = form.category.data
-            try:
-                category_object = Category.query.filter(Category.name==category).one()
-                item = Item(name=name, adress=adress, city=city,
-                       phone=phone,description=desc,category_id=category_object.id
-                )
-                db.session.add(item)
-                db.session.commit()
-                flash('item added successfully','success')
-                return redirect(url_for('items.item_list'))
-            except exc.SQLAlchemyError as e:
-                logging.debug(f'something went wrong when adding new item: {e}','danger')
-
-        else:
-            flash('Choose a city please','danger')
-
-    context['page_title'] = 'add item'
-    return render_template('items/add_item.html',context=context, form=form)

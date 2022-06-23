@@ -3,12 +3,15 @@ sudo: required
 services:
   - docker
 
+env:
+  - Travis=True
+
 before_install:
   - docker build -t idourah96/yellow-page-web -f ./services/web/Dockerfile.dev ./services/web
 
 script:
-  - docker run idourah96/yellow-page-web pytest -v
-
+  - docker run idourah96/yellow-page-web
+ 
 after_success:
   - docker build -t idourah96/yellow-page-nginx ./services/nginx
   - docker build -t idourah96/yellow-page-web ./services/web

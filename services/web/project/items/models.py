@@ -1,10 +1,8 @@
-from project import db, flask_admin
+from project import db, admin
 from sqlalchemy import String, Integer, ForeignKey, Column,Text, DateTime
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from flask_admin.contrib.sqla import ModelView
-
-
+from .views import ItemModelView ,CategoryModelView, CityModelView
 
 class Category(db.Model):
 
@@ -16,13 +14,24 @@ class Category(db.Model):
     def __repr__(self) -> str:
         return self.name  
 
+class City(db.Model):
+
+    __tablename__ = 'city'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100), unique=True)
+    items = relationship('Item', back_populates='city', cascade='all,delete')
+
+    def __repr__(self) -> str:
+        return self.name
+
 class Item(db.Model):
 
     __tablename__ = 'item'
     id = Column(Integer, primary_key=True)
-    name = Column(String(80))
+    name = Column(String(80),unique=True)
     adress = Column(String(100))
-    city = Column(String(100))
+    city_id = Column(Integer, ForeignKey('city.id'))
+    city = relationship('City', back_populates='items')
     phone = Column(String(10))
     description = Column(Text)
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -34,3 +43,7 @@ class Item(db.Model):
     def __repr__(self) -> str:
         return self.name 
 
+
+admin.add_view(CategoryModelView(Category, db.session))
+admin.add_view(ItemModelView(Item, db.session))
+admin.add_view(CityModelView(City, db.session))

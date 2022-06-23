@@ -7,21 +7,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class='navbar-nav mr-auto'>
             <li class='nav-item'>
-                <a class='nav-link' href="{{ url_for('app.home') }}">Acceuil </a>
+                <a class='nav-link' href="{{ url_for('app.index') }}">Acceuil </a>
             </li>
             <li class='nav-item'>
-            <a class='nav-link' href="{{ url_for('app.index') }}">Categories</a>
-            </li>
-            <li class='nav-item'>
-                <a class='nav-link' href="{{ url_for('items.item_list') }}">Items</a>
-            </li>
-            <li class='nav-item'>
-                <a class='nav-link' href="{{ url_for('app.add_category') }}">Add category</a>
-            </li>
-            <li class='nav-item'>
-                <a class='nav-link' href="{{ url_for('items.add_item') }}">Add item</a>
+                <div class='btn-group'>
+                    <a href='#' class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu">
+                      {% include 'includes/categories.html' %}
+                    </ul>
+                </div>
             </li>
         </ul>
-        <a href="{{ url_for('account.login_view') }}" class='btn btn-sm' id='btnLogin'>Connexion</a>
+        <a href="{{ url_for('auths.login_view') }}" class='btn btn-sm' id='btnLogin'>Connexion</a>
     </div>
 </nav>

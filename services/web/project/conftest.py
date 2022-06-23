@@ -3,17 +3,13 @@ import pytest
 from sqlalchemy_utils.functions import database_exists
 from config.config import TestingConfig
 
-
-
 @pytest.fixture(scope='session')
 def app():
     app = create_app(config=TestingConfig)
-
     return app 
 
 @pytest.fixture(scope='session')
 def db(app, request):
-
     app = create_app(TestingConfig)
     database.app = app
     if database_exists(database.engine.url): 
@@ -38,27 +34,6 @@ def session(db, request):
     return session
 
 
-"""
-  try:
-      pass
-    except ProgrammingError:
-        logging.debug(f"Could not drop db_test, probably not exist.")
-        conn.execute("ROLLBACK")
-    except OperationalError:
-        logging.debug("Could not drop the database because it is being used accessed by other user")
-        conn.execute("ROLLBACK")
-        
-    logging.debug("Creating db_test database")
-
-     logging.debug("droping the old database")
-    engine = create_engine("postgresql://postgres:postgres@db/")
-    conn = engine.connect()
-    conn = conn.execution_options(autocommit=False)
-    conn.execute(" ROLLBACK ")
-    conn.execute(f"DROP DATABASE IF EXISTS db_test")
-  
-    conn.execute("CREATE DATABASE db_test")
-
-    database.app = app 
-    database.create_all()
-"""
+@pytest.fixture()
+def client(app):
+    return app.test_client()

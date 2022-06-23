@@ -1,13 +1,16 @@
 version: '3.9'
 services:
-
   db:    
-    image: postgres:alpine 
+    image: postgres:alpine
     env_file:
       - ./services/web/config/.env
     restart: always 
     volumes:
-      - postgres_data_dev:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGES_NAME=postgres 
+      - POSTGRES_PASSWORD=postgres
 
   web:
     container_name: yellow_app
@@ -26,4 +29,4 @@ services:
     restart: always
 
 volumes:
-  postgres_data_dev:
+  postgres_data:

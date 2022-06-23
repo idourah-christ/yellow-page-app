@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 {% block content %}
 <div class='container col-md-4'>
-    {% from 'account/_formhelper.html' import render_field %}
+    {% from 'auths/_formhelper.html' import render_field %}
     <form method='POST' class='auth-forms'>
         <h4 class='form-title'>Créer un nouveau compte</h4>
         <dl>
