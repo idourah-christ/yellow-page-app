@@ -1,0 +1,7 @@
+{% with categories = context['categories'] %}
+    {% if categories %}
+    {% for cat in categories %}
+     <a class="dropdown-item" href="{{ url_for('items.item_by_category_view', category=cat.name) }}">{{ cat.name }}</a>
+    {% endfor %}
+    {% endif %}
+{% endwith %}

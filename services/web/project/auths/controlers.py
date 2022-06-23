@@ -1,22 +1,21 @@
-import email
 from sqlalchemy import exc 
 from flask import (redirect, render_template, 
     request, url_for, Blueprint, flash)
 from flask_admin import helpers
 from project import db
 from project.users.models import User
-from project.users import forms as user_forms
+from project.auths import forms as user_forms
 import flask_login as login
 import logging
 
-account = Blueprint('account', __name__)
+auths = Blueprint('auths', __name__)
 
-@account.route('logout', methods=['POST', 'GET'])
+@auths.route('logout', methods=['POST', 'GET'])
 def logout_view():
     login.logout_user()
     return redirect(url_for('account.login_view'))
 
-@account.route('login', methods=['GET','POST'])
+@auths.route('login', methods=['GET','POST'])
 def login_view():
     context = {}
     form = user_forms.LoginForm(request.form)
@@ -27,9 +26,9 @@ def login_view():
         return redirect(url_for('app.index'))
 
     context['page_title'] = 'LaViolette | Connexion' 
-    return render_template('account/login.html', form=form, context=context)
+    return render_template('auths/login.html', form=form, context=context)
 
-@account.route('registration', methods=['GET','POST'])
+@auths.route('registration', methods=['GET','POST'])
 def registration_view():
     context = {}
     form = user_forms.RegistrationForm(request.form)
@@ -42,18 +41,13 @@ def registration_view():
             flash(f"Création du compte réussie !! Connectez-vous {form.username.data}", "success")
             return redirect(url_for('account.login_view'))
         except exc.SQLAlchemyError as e:
-            flash
-            (f"""
-                La création de votre compte a échoué, Nous vous prions de reassayer plus tard. {e}"""
+            flash(f"""La création de votre compte a échoué, Nous vous prions de reassayer plus tard. {e}"""
                 ,'danger'
             )
-            logging.debug
-            ("""
-                something went wrong during registration of user: {user.username}
-                The error detail can be found here : {e}
-             """
+            logging.debug(f"""something went wrong during registration of user: {user.username}
+                The error detail can be found here : {e}"""
             )
             db.session.rollback()
           
     context['page_title'] = 'LaViolette | Nouveau compte'
-    return render_template('account/registration.html', context=context, form=form)
+    return render_template('auths/registration.html', context=context, form=form)

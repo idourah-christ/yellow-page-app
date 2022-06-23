@@ -1,11 +1,11 @@
-from locale import currency
+from ast import Pass
 from flask_admin.contrib import sqla
 from flask_admin import helpers, expose
 import flask_login as login
 import flask_admin as admin
-from flask_admin.contrib.sqla import ModelView
 from flask import redirect, request, url_for
 from project.mixins import AdminModelViewMixin
+from wtforms.fields import PasswordField
 
 
 class MyModelView(sqla.ModelView):
@@ -45,9 +45,14 @@ class MyAdminIndexView(admin.AdminIndexView):
 class UserModelView(AdminModelViewMixin):
 
     column_list = [
-        'email', 'username','is_active', 'create_at', 'is_admin'
+        'email', 'username','is_active', 'date_created', 'is_admin'
     ]
-
     column_searchable_list = ['email', 'username']
-    column_filters = ['username', 'create_at']
+    column_filters = ['username', 'date_created']
+
+    form_columns = ['email','username', 'password', 'admin']
+    form_extra_fields = {
+        'password': PasswordField('New password')
+    }
+  
     

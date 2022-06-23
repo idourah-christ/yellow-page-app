@@ -10,7 +10,7 @@ def index():
     page = request.args.get('page',1, type=int)
     context['categories'] = Category.query.all()
     context['items'] = Item.query.order_by(Item.created_at.desc()).paginate(per_page=3, page=page)
-    return render_template('app/home.html',context=context)
+    return render_template('home.html',context=context)
 
 @app.context_processor
 def base():

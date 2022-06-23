@@ -36,7 +36,7 @@ def create_app(config=None):
 def register_blueprints(app):
     from project import routes 
     app.register_blueprint(routes.app, url_prefix='/')
-    from project.items import routes
-    app.register_blueprint(routes.items, url_prefix='/items')
-    from project.users import routes
-    app.register_blueprint(routes.account, url_prefix='/account')
+    from project.items import controlers
+    app.register_blueprint(controlers.items, url_prefix='/items')
+    from project.auths.controlers import auths
+    app.register_blueprint(auths, url_prefix='/auths')

@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 {% block content %}
 <div class='container col-md-4'>
-    {% from "account/_formhelper.html" import render_field %}
+    {% from "auths/_formhelper.html" import render_field %}
     <form method='POST' class='auth-forms'>
       <h4 class='form-title'>Connexion à votre compte</h4>
       <dl>
@@ -10,7 +10,7 @@
       </dl>
       <p><input type=submit value="Connexion" class='btn btn-authentication'></p>
       <p>Vous n'avez pas de compte ?
-        <a href="{{ url_for('account.registration_view') }}">Creer compte</a>
+        <a href="{{ url_for('auths.registration_view') }}">Creer compte</a>
       </p>
     </form>
     {% with messages = get_flashed_messages(with_categories=true) %}

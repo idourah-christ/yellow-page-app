@@ -5,19 +5,31 @@ from datetime import datetime
 from flask_admin.contrib.sqla import ModelView
 from .views import UserModelView
 
-class User(db.Model):
-    __tablename__ = "users"
+class Base(db.Model):
 
-    id= db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(100))
-    last_name = db.Column(db.String(100))
-    username = db.Column(db.String(80), unique=True)
+    __abstract__ = True
+
+    id = db.Column(db.Integer, primary_key=True)
+    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
+    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+
+
+class User(Base):
+    __tablename__ = "auth_user"
+
+    # User Name
+    username = db.Column(db.String(80), unique=True, nullable=False)
+
+    # Identification Data: email & password
+    email = db.Column(db.String(120), unique=True, nullable=False)
+
+    _password = db.Column(db.String(180), nullable=False)
+
     is_active = db.Column(db.Boolean, default=False)
-    admin = db.Column(db.Boolean, default=False)
-    email = db.Column(db.String(120), unique=True)
-    _password = db.Column(db.String(180))
-    create_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    # Authorisation Data 
+    admin = db.Column(db.Boolean, default=False)
+ 
     @hybrid_property
     def password(self):
         return self._password

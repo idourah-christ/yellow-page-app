@@ -1,4 +1,6 @@
-* {}
+a:hover {
+    text-decoration: none;
+}
 
 nav.navbar {
     padding: 10px 5px 10px 5px;
@@ -43,7 +45,7 @@ div#hero-container {
 }
 
 .item-name {
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 300px;
     text-decoration: none;
     color: black;
@@ -55,15 +57,22 @@ div#hero-container {
     cursor: pointer;
 }
 
+a.item-card-btn {
+    background-color: cornflowerblue;
+}
+
+p.item-category {
+    color: #874676;
+}
+
 .item-card-btn {
     border-radius: 10px;
 }
 
 .item-card {
     box-shadow: 0px 0px 10px #874676;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
 }
-
 
 a.item-card-btn {
     border-radius: 40px;
@@ -73,6 +82,10 @@ a.item-card-btn {
 
 .item-adress {
     font-size: 20px;
+}
+
+img.item-img {
+    width: 100px;
 }
 
 a.page-link {
@@ -85,8 +98,6 @@ a.active-pagination {
     background-color: #874676;
     color: white;
 }
-
-
 
 .item-description {
     font-size: 18px;
@@ -140,4 +151,31 @@ li#category_title a:hover {
 
 #category_title_icon {
     font-size: 19px;
+}
+
+/*********** news card ******************/
+div#news-card {
+    border: none;
+    margin-top: 40px;
+    padding-top: 9px;
+}
+
+div#news-card img {
+    height: 190px;
+}
+
+div#news-card h5.card-title {
+    margin-top: 8px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.annonce-title {
+    color: #874676;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.annonce-bar {
+    background-color: #874676;
 }

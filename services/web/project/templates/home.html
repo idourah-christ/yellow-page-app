@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+{% block content %}
+    <div>
+        <div class='pt-3' id='hero-container'>
+           {% include 'includes/search_form.html' %}
+        </div>
+        <div class='container'>
+            <div class='row mt-3'>
+                <div class='col-md-8 col-12 mt-3'>
+                    <div class=''>    
+                        {% include 'includes/pagination.html' %}
+                    </div>
+                    {% with places_data = context['items'] %}
+                    {% if places_data %}
+                        {% for item in places_data.items %}
+                        {% include 'includes/asset_card.html' %}
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
+                <div class='col-md-4 pt-3'>
+                    <h5 class='annonce-title'>Les dernieres nouvelles</h5>
+                    <hr class='annonce-bar'>
+                    <div class='card mt-2' id='news-card'>
+                        <img src='https://www.opinion-internationale.com/wp-content/uploads/2019/12/erosions-de-ngamakosso_congobrazzaville.jpg' with='350'>
+                        <h5 class='card-title'>
+                            <a href='#'>
+                                Le Congo Brazzaville peine à répondre aux conditions du
+                            </a>
+                        </h5>
+                    </div>
+
+                    <div class='card mt-2' id='news-card'>
+                        <img src='https://www.francetvinfo.fr/pictures/BzJTUULH8M1ezrDZPh97W-RpPkU/1200x1200/2018/11/27/March-Brazzaville-capitale-R-publique-Congo.jpg'>
+                        <h5 class='card-title'>
+                            <a href='#'>
+                                Le Congo Brazzaville peine à répondre aux conditions du
+                            </a>
+                        </h5>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+{% endblock %}
